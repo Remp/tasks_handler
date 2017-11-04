@@ -1,6 +1,7 @@
 const CLIENT_ID = '477913453165-sna3dpc2k0ab921m1iorpapvsjgrmqmj.apps.googleusercontent.com';
 const SCOPES = ['https://www.googleapis.com/auth/tasks', 'https://www.googleapis.com/auth/plus.me'];
 
+
 // авторизация пользователя
 export default {
     authorize(params){
