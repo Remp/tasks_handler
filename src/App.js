@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './styles/App.css';
-import LoginPage from './LoginPage';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
@@ -9,7 +8,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="app">
-          <LoginPage />
+          {this.props.children}
         </div>
       </MuiThemeProvider>
     );

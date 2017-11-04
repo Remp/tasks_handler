@@ -1,0 +1,15 @@
+.logged-in-layout {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+.logged-in-layout .navbar {
+  display: flex;
+}
+.logged-in-layout .navbar .list {
+  flex: 1;
+  display: flex;
+}
+.logged-in-layout .navbar .list .task-list {
+  flex: 1;
+}

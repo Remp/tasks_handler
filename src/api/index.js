@@ -6,7 +6,7 @@ const SCOPES = ['https://www.googleapis.com/auth/tasks', 'https://www.googleapis
 export default {
     authorize(params){
         return new Promise((resolve, reject) => {
-            gapi.auth.authorize(
+            window.gapi.auth.authorize(
                 {
                     'client_id': CLIENT_ID,
                     'scope': SCOPES,
@@ -16,7 +16,7 @@ export default {
                 authresult => {
                     if (authresult.error)
                         return reject(authresult.error);
-                    return gapi.client.load('tasks', 'v1', () => gapi.client.load('plus', 'v1', () => resolve() ) );
+                    return window.gapi.client.load('tasks', 'v1', () => window.gapi.client.load('plus', 'v1', () => resolve() ) );
                         
                 }
             )
