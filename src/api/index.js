@@ -21,5 +21,11 @@ export default {
                 }
             )
         })
+    },
+    getTaskList() {
+        let request = window.gapi.client.tasks.tasklists.list();
+        return new Promise((resolve, reject) => {
+            request.execute(resp => resolve(resp));
+        })
     }
 }
