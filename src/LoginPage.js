@@ -5,6 +5,7 @@ import './styles/LoginPage.css';
 import desk from './img/desk.png';
 import SessionActions from './actions/SessionActions';
 import SessionStore from './stores/SessionStore';
+import PropTypes from 'prop-types'
 
 function getStateFromFlux(){
     return SessionStore.isLoggedIn();
@@ -17,14 +18,18 @@ class LoginPage extends Component{
             isLoggedIn: getStateFromFlux()
         };
     }
+    static contextTypes = {
+        router: PropTypes.func.isRequired
+    } 
     onChange_handler(){
-        this.setState(getStateFromFlux());
+        if (this.setState)
+            this.setState({isLoggedIn: getStateFromFlux()});
     }
     componentDidMount(){
-        SessionStore.addChangeListener(this.onChange_handler);
+        SessionStore.addChangeListener(() => this.onChange_handler());
     }
     componentWillUnmount(){
-        SessionStore.removeChangeListener(this.onChange_handler);
+        SessionStore.removeChangeListener(() => this.onChange_handler());
     }
     componentWillUpdate(nextP, nextS){
         // если залогинен тогда переводим на главную страницу
@@ -38,9 +43,9 @@ class LoginPage extends Component{
         const { location } = this.props
 
         if (location.state && location.state.nextPathname) {
-            this.context.router.replace(location.state.nextPathname);
+            this.context.router.history.replace(location.state.nextPathname);
         } else {
-            this.context.router.replace('/lists');
+            this.context.router.history.replace('/lists');
         }
     }
     render(){

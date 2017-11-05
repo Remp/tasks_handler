@@ -18,11 +18,7 @@ window.handleGoogleApiLoaded = () => {
 
 const application = (
   <BrowserRouter>
-    <Route path='/' component={App}>
-      <Route path='/login' component={LoginPage}/>
-      <Route path='/lists' component={LoggedInLayout} onEnter={onEnter_handler}>
-      </Route>
-    </Route>
+    <Route path='/' component={App}/>
   </BrowserRouter>
 )
 function RenderApp(){
