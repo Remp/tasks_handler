@@ -35,5 +35,22 @@ export default {
         return new Promise((resolve, reject) => {
             request.execute(resp => resolve(resp));
         })
+    },
+    getTasks(taskListId){
+        let request = window.gapi.client.tasks.tasks.list({
+            taskList: taskListId
+        });
+        return new Promise((resolve, reject) => {
+            request.execute(resp => resolve(resp));
+        })
+    },
+    insertTask(task){
+        let request = window.gapi.client.tasks.tasks.insert({
+            tasklist : task.Id,
+            title    : task.title
+        });
+        return new Promise((resolve, reject) => {
+            request.execute(resp => resolve(resp));
+        })
     }
 }

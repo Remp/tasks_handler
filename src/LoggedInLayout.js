@@ -9,7 +9,9 @@ import TasksListStore from './stores/TasksListStore';
 import Subheader from 'material-ui/Subheader';
 import TaskAddModal from './TaskAddModal';
 import TaskListActions from './actions/TasksListActions';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
+import TasksList from './TasksList';
 
 const HomeIcon = <FontIcon className="fa fa-home" />
 const AskIcon = <FontIcon className="fa fa-question-circle-o"  />
@@ -27,8 +29,9 @@ class LoggedInLayout extends Component{
     constructor(){
         super();
         this.state = {
-            ...getStateFromFlux(),
-            isCreatingTask: false
+            tasksList: TasksListStore.getTasksList(),
+            isCreatingTask: false,
+            currentId: ''
         }
     }
     static contextTypes = {
@@ -47,7 +50,8 @@ class LoggedInLayout extends Component{
         TasksListStore.removeChangeListener(() => this.onListChange())        
     }
     itmClick_handler(id){
-        this.context.router.history.push(`/lists/${id}`);
+        this.context.router.history.push(`/lists/id:${id}`);
+        this.setState({currentId: id});
     }
     imtAddClick_handler(){
         this.setState({isCreatingTask: true});
@@ -87,7 +91,7 @@ class LoggedInLayout extends Component{
                     </List>
                 </div>
                 <div className="content">
-                    {this.props.children}
+                    <Route path="/id:" render={(props) => <TasksList currentId={this.state.currentId}/>} />
                 </div>
                 <TaskAddModal isOpen={this.state.isCreatingTask} 
                     onSubmit={(text) => this.onSubmit_handler(text)}
