@@ -7,6 +7,9 @@ import {blue500, red500, greenA200} from 'material-ui/styles/colors';
 import 'font-awesome/css/font-awesome.min.css';
 import TasksListStore from './stores/TasksListStore';
 import Subheader from 'material-ui/Subheader';
+import TaskAddModal from './TaskAddModal';
+import TaskListActions from './actions/TasksListActions';
+import PropTypes from 'prop-types'
 
 const HomeIcon = <FontIcon className="fa fa-home" />
 const AskIcon = <FontIcon className="fa fa-question-circle-o"  />
@@ -28,11 +31,33 @@ class LoggedInLayout extends Component{
             isCreatingTask: false
         }
     }
+    static contextTypes = {
+        router: PropTypes.func.isRequired
+    }
+    onListChange(){
+        this.setState({
+            tasksList: TasksListStore.getTasksList()
+        })
+    }
+    componentDidMount(){
+        TasksListStore.addChangeListener(() => this.onListChange());
+        this.onListChange();
+    }
+    componentWillUnmount(){
+        TasksListStore.removeChangeListener(() => this.onListChange())        
+    }
     itmClick_handler(id){
         this.context.router.history.push(`/lists/${id}`);
     }
     imtAddClick_handler(){
         this.setState({isCreatingTask: true});
+    }
+    onSubmit_handler(text){
+        TaskListActions.insertTasksList(text);
+        this.setState({isCreatingTask: false});
+    }
+    onClose_handler(){
+        this.setState({isCreatingTask: false});
     }
     render(){
         return (
@@ -55,7 +80,8 @@ class LoggedInLayout extends Component{
                                 })
                             }
                         </List>
-                        <ListItem primaryText='New task' leftIcon={PlusIcon}/>
+                        <Divider />
+                        <ListItem primaryText='New task' leftIcon={PlusIcon} onClick={() => this.imtAddClick_handler()}/>
                         <Divider />
                         <ListItem primaryText='Logout' leftIcon={ExitIcon} />
                     </List>
@@ -63,6 +89,10 @@ class LoggedInLayout extends Component{
                 <div className="content">
                     {this.props.children}
                 </div>
+                <TaskAddModal isOpen={this.state.isCreatingTask} 
+                    onSubmit={(text) => this.onSubmit_handler(text)}
+                    onClose={() => this.onClose_handler()}
+                />
             </div>
         )
     }

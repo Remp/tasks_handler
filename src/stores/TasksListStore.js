@@ -39,6 +39,18 @@ AppDispatcher.register(action => {
             _tasks_list = [];
             _error = action.error;
             TasksListStore.emitChange();
+            break;
+        }
+        case AppConstants.TASKS_LIST_INSERT_SUCCESS: {
+            const newList = formatData(action.taskList);
+            _tasks_list.push(newList);
+            TasksListStore.emitChange();
+            break;
+        }
+        case AppConstants.TASKS_LIST_INSERT_FAIL: {
+            _error = action.error;
+            TasksListStore.emitChange();
+            break;
         }
         default: {
 

@@ -6,6 +6,7 @@ import LoginPage from './LoginPage';
 import registerServiceWorker from './registerServiceWorker';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import SessionActions from './actions/SessionActions';
+import TasksListActions from './actions/TasksListActions'
 import { BrowserRouter, Route } from 'react-router-dom';
 import LoggedInLayout from './LoggedInLayout';
 import SessionStorage from './stores/SessionStore';
@@ -13,7 +14,7 @@ import SessionStorage from './stores/SessionStore';
 injectTapEventPlugin();
 
 window.handleGoogleApiLoaded = () => {
-  SessionActions.authorize(true, RenderApp());
+  SessionActions.authorize(true, () => TasksListActions.getTasksList(RenderApp()));
 }
 
 const application = (

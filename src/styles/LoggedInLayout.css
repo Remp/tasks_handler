@@ -17,4 +17,5 @@
 }
 .logged-in-layout .navbar .list .task-list {
   flex: 1;
+  overflow: auto;
 }
