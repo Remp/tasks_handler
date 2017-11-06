@@ -38,7 +38,7 @@ class TasksList extends Component{
         })
     }
     onSubmit_handler(text){
-        TasksActions.insertTask({id: this.props.currentId, title: text});
+        TasksActions.insertTask({id: this.props.params.id, title: text});
         this.setState({
             isAddingTask: false
         })

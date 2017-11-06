@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import SessionActions from './actions/SessionActions';
 import TasksListActions from './actions/TasksListActions'
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import LoggedInLayout from './LoggedInLayout';
 import SessionStorage from './stores/SessionStore';
 

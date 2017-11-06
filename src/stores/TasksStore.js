@@ -28,7 +28,7 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
         this.on(CHANGE_EVENT, callback)
     },
     removeChangeListener(callback){
-        this.remove(CHANGE_EVENT, callback)
+        this.removeListener(CHANGE_EVENT, callback)
     }
 });
 AppDispatcher.register(action => {
