@@ -91,7 +91,7 @@ class LoggedInLayout extends Component{
                     </List>
                 </div>
                 <div className="content">
-                    <Route path="/id:" render={(props) => <TasksList currentId={this.state.currentId}/>} />
+                    <Route path="/lists/id:" render={(props) => <TasksList currentId={this.state.currentId}/>} />
                 </div>
                 <TaskAddModal isOpen={this.state.isCreatingTask} 
                     onSubmit={(text) => this.onSubmit_handler(text)}

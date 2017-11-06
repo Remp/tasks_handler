@@ -19,7 +19,7 @@ window.handleGoogleApiLoaded = () => {
 
 const application = (
   <BrowserRouter>
-    <Route path='/' component={App}/>
+    <Route path='/' component={App} onEnter={onEnter_handler}/>
   </BrowserRouter>
 )
 function RenderApp(){
@@ -32,6 +32,11 @@ function onEnter_handler(nextS, replace){
     replace({
       pathname: '/login',
       state: { nextPathbane: nextS.location.pathname }
+    })
+  } 
+  else{
+    replace({
+      pathname: '/lists',
     })
   }
 }
