@@ -31,23 +31,22 @@ class LoggedInLayout extends Component{
         this.state = {
             tasksList: TasksListStore.getTasksList(),
             isCreatingTask: false,
-            currentId: ''
         }
     }
     static contextTypes = {
         router: PropTypes.func.isRequired
     }
-    onListChange(){
+    onListChange = () => {
         this.setState({
             tasksList: TasksListStore.getTasksList()
         })
     }
     componentDidMount(){
-        TasksListStore.addChangeListener(() => this.onListChange());
+        TasksListStore.addChangeListener(this.onListChange);
         this.onListChange();
     }
     componentWillUnmount(){
-        TasksListStore.removeChangeListener(() => this.onListChange())        
+        TasksListStore.removeChangeListener(this.onListChange)        
     }
     itmClick_handler(id){
         this.context.router.history.push(`/lists/${id}`);
@@ -90,7 +89,7 @@ class LoggedInLayout extends Component{
                     </List>
                 </div>
                 <div className="content">
-                    <Route path="/lists/:id" component={({match}) => <TasksList params={match.params}/>} />
+                    <Route path="/lists/:taskId" component={({match}) => <TasksList params={match.params}/>} />
                 </div>
                 <TaskAddModal isOpen={this.state.isCreatingTask} 
                     onSubmit={(text) => this.onSubmit_handler(text)}

@@ -38,7 +38,7 @@ export default {
     },
     getTasks(taskListId){
         let request = window.gapi.client.tasks.tasks.list({
-            taskList: taskListId
+            tasklist: taskListId
         });
         return new Promise((resolve, reject) => {
             request.execute(resp => resolve(resp));
@@ -46,7 +46,7 @@ export default {
     },
     insertTask(task){
         let request = window.gapi.client.tasks.tasks.insert({
-            tasklist : task.Id,
+            tasklist : task.id,
             title    : task.title
         });
         return new Promise((resolve, reject) => {

@@ -5,6 +5,7 @@ import TasksStore from './stores/TasksStore';
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import TaskAddModal from './TaskAddModal';
+import PropTypes from 'prop-types';
 
 class TasksList extends Component{
     constructor(){
@@ -14,23 +15,24 @@ class TasksList extends Component{
             tasks: TasksStore.getTasks()
         }
     }
-    onChange_handler(){
+    onChange_handler = () => {
         this.setState({
             tasks: TasksStore.getTasks()
         })
     }
     componentDidMount(){
-        TasksStore.addChangeListener(() => this.onChange_handler());
+        TasksStore.addChangeListener(this.onChange_handler);
     }
     componentWillUnmount(){
-        TasksStore.removeChangeListener(() => this.onChange_handler());        
+        TasksStore.removeChangeListener(this.onChange_handler);        
     }
     componentWillReceiveProps(nextP){
-        if (this.props.currentId !== nextP.currentId)
-            TasksActions.getTasks(nextP.currentId);
+        let s =5;
+        if (this.props.params.taskId !== nextP.params.taskId)
+            TasksActions.getTasks(nextP.params.taskId);
     }
     componentWillMount(){
-        TasksActions.getTasks(this.props.currentId);
+        TasksActions.getTasks(this.props.params.taskId);
     }
     onClick_handler(){
         this.setState({
@@ -38,14 +40,14 @@ class TasksList extends Component{
         })
     }
     onSubmit_handler(text){
-        TasksActions.insertTask({id: this.props.params.id, title: text});
+        TasksActions.insertTask({id: this.props.params.taskId, title: text});
         this.setState({
             isAddingTask: false
         })
     }
     onClose_handler(){
         this.setState({
-            isAddingTask: true
+            isAddingTask: false
         })
     }
     render(){
@@ -58,11 +60,12 @@ class TasksList extends Component{
                 <List>
                     {
                         this.state.tasks.map((el) => {
-                            return (
-                                <ListItem key={el.id} primaryText={el.text}
-                                    leftCheckbox={<Checkbox checked={el.isCompleted} />}    
-                                />
-                            )
+                            if (el)
+                                return (
+                                    <ListItem key={el.id} primaryText={el.text}
+                                        leftCheckbox={<Checkbox checked={el.isCompleted} />}    
+                                    />
+                                )
                         })
                     }
                 </List>

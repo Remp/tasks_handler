@@ -22,8 +22,8 @@ const TasksListActions = {
                 callback;
         })
     },
-    insertTasksList(text){
-        api.insertTasksList(text)
+    insertTasksList(params){
+        api.insertTasksList(params)
         .then(data => {
             AppDispatcher.dispatch({
                 type: AppConstants.TASKS_LIST_INSERT_SUCCESS,

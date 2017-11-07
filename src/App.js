@@ -15,10 +15,10 @@ class App extends Component {
 
   componentDidMount(){
     if (!SessionStorage.isLoggedIn()){
-      this.context.router.history.push('/login');
+      this.props.history.push('/login');
     }
     else{
-      this.context.router.history.push('/lists');     
+      this.props.history.push('/lists');     
     }
   }
   render() {

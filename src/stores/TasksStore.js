@@ -7,6 +7,7 @@ const  CHANGE_EVENT = 'change';
 let _tasks = [];
 let _error = null;
 function formatData(data){
+    if (data)
     return {
         id          : data.id,
         text        : data.title,
@@ -44,7 +45,8 @@ AppDispatcher.register(action => {
             TasksStore.emitChange();
         }
         case AppConstants.TASK_INSERT_SUCCESS: {
-            _tasks.unshift(action.task);
+            
+            _tasks.unshift(formatData(action.task));
             TasksStore.emitChange();
             break;
         }
