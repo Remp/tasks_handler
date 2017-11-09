@@ -11,5 +11,7 @@ export default keymirror({
         TASKS_LOAD_SUCCESS: null,
         TASKS_LOAD_FAIL: null,
         TASK_INSERT_SUCCESS: null,
-        TASK_INSERT_FAIL: null
+        TASK_INSERT_FAIL: null,
+        TASK_UPDATE_SUCCESS: null,
+        TASK_UPDATE_FAIL: null
 })

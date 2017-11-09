@@ -53,7 +53,21 @@ AppDispatcher.register(action => {
         }
         case AppConstants.TASK_INSERT_FAIL: {
             _error = action.error;
+            TasksStore.emitChange();            
         }
+        case AppConstants.TASK_UPDATE_SUCCESS: {
+            const index = _tasks.findIndex((task) => {
+                return task.id === action.task.taskId
+            });
+            _tasks[index] = formatData(action.task);
+            TasksStore.emitChange();
+            break;
+        }
+        case AppConstants.TASK_UPDATE_FAIL: {
+            _error = action.error;
+            TasksStore.emitChange();            
+        }
+        default: {}
     }
 })
 export default TasksStore;

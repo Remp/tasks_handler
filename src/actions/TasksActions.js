@@ -32,6 +32,21 @@ const TasksActions = {
                 error: err
             })
         })
+    },
+    updateTask(task){
+        api.updateTask(task)
+        .then(data => {
+            AppDispatcher.dispatch({
+                type: AppConstants.TASK_UPDATE_SUCCESS,
+                task: data
+            })
+        })
+        .catch(err => {
+            AppDispatcher.dispatch({
+                type: AppConstants.TASK_UPDATE_FAIL,
+                error: err
+            })
+        })
     }
 }
 export default TasksActions;

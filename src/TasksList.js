@@ -6,6 +6,7 @@ import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import TaskAddModal from './TaskAddModal';
 import PropTypes from 'prop-types';
+import Task from './Task'
 
 class TasksList extends Component{
     constructor(){
@@ -57,18 +58,18 @@ class TasksList extends Component{
                     <IconButton iconClassName='fa fa-plus' onClick={() => this.onClick_handler()}/>
                     <div className="title">Current tasks</div>
                 </div>
-                <List>
+                <div className='task-list'>
                     {
                         this.state.tasks.map((el) => {
                             if (el)
                                 return (
-                                    <ListItem key={el.id} primaryText={el.text}
-                                        leftCheckbox={<Checkbox checked={el.isCompleted} />}    
-                                    />
+                                    <Task key={el.id} text={el.text} isChecked={el.isCompleted} 
+                                        id={el.id} listId={this.props.params.taskId}
+                                    />   
                                 )
                         })
                     }
-                </List>
+                </div>
                 <TaskAddModal isOpen={this.state.isAddingTask} 
                     onSubmit={(text) => this.onSubmit_handler(text)}
                     onClose={() => this.onClose_handler()}
