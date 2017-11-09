@@ -43,6 +43,7 @@ AppDispatcher.register(action => {
             _tasks = [];
             _error = action.error;
             TasksStore.emitChange();
+            break;
         }
         case AppConstants.TASK_INSERT_SUCCESS: {
             
