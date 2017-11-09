@@ -89,7 +89,7 @@ class LoggedInLayout extends Component{
                     </List>
                 </div>
                 <div className="content">
-                    <Route path="/lists/:taskId" component={({match}) => <TasksList params={match.params}/>} />
+                    <Route path="/lists/:listId" component={({match}) => <TasksList params={match.params}/>} />
                 </div>
                 <TaskAddModal isOpen={this.state.isCreatingTask} 
                     onSubmit={(text) => this.onSubmit_handler(text)}

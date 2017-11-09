@@ -35,7 +35,7 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
 AppDispatcher.register(action => {
     switch(action.type){
         case AppConstants.TASKS_LOAD_SUCCESS: {
-            _tasks = action.tasks.map(formatData);
+            _tasks = action.tasks;
             TasksStore.emitChange();
             break;
         }
@@ -47,7 +47,7 @@ AppDispatcher.register(action => {
         }
         case AppConstants.TASK_INSERT_SUCCESS: {
             
-            _tasks.unshift(formatData(action.task));
+            _tasks.unshift(action.task);
             TasksStore.emitChange();
             break;
         }
@@ -57,9 +57,9 @@ AppDispatcher.register(action => {
         }
         case AppConstants.TASK_UPDATE_SUCCESS: {
             const index = _tasks.findIndex((task) => {
-                return task.id === action.task.taskId
+                return task.id === action.task.id
             });
-            _tasks[index] = formatData(action.task);
+            _tasks[index] = action.task;
             TasksStore.emitChange();
             break;
         }

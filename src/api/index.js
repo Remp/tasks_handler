@@ -53,13 +53,17 @@ export default {
             request.execute(resp => resolve(resp));
         })
     },
-    updateTask({tListId, id, isChecked, text}){
+    updateTask(task, listId){
         let request = window.gapi.client.tasks.tasks.update({
-            tasklist: tListId,
-            task: id,
-            id: id,
-            status: isChecked ? 'completed' : 'needsAction',
-            title: text
+            task: task,
+            id: task.id,
+            tasklist: listId,
+            status: task.status
+            // tasklist: tListId,
+            // task: id,
+            // id: id,
+            // status: isChecked ? 'completed' : 'needsAction',
+            // title: text
         })
         return new Promise((resolve, reject) => {
             request.execute(resp => resolve(resp));

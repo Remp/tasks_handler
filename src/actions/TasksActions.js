@@ -33,8 +33,8 @@ const TasksActions = {
             })
         })
     },
-    updateTask(task){
-        api.updateTask(task)
+    updateTask(task, listId){
+        api.updateTask(task, listId)
         .then(data => {
             AppDispatcher.dispatch({
                 type: AppConstants.TASK_UPDATE_SUCCESS,

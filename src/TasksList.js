@@ -29,11 +29,11 @@ class TasksList extends Component{
     }
     componentWillReceiveProps(nextP){
         let s =5;
-        if (this.props.params.taskId !== nextP.params.taskId)
-            TasksActions.getTasks(nextP.params.taskId);
+        if (this.props.params.taskId !== nextP.params.listId)
+            TasksActions.getTasks(nextP.params.listId);
     }
     componentWillMount(){
-        TasksActions.getTasks(this.props.params.taskId);
+        TasksActions.getTasks(this.props.params.listId);
     }
     onClick_handler(){
         this.setState({
@@ -63,9 +63,7 @@ class TasksList extends Component{
                         this.state.tasks.map((el) => {
                             if (el)
                                 return (
-                                    <Task key={el.id} text={el.text} isChecked={el.isCompleted} 
-                                        id={el.id} listId={this.props.params.taskId}
-                                    />   
+                                    <Task key={el.id} task={el} listId={this.props.params.listId}/>   
                                 )
                         })
                     }
