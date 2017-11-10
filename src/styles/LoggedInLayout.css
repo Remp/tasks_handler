@@ -19,3 +19,7 @@
   flex: 1;
   overflow: auto;
 }
+.logged-in-layout .content {
+  flex: 1;
+  padding-top: 1rem;
+}
