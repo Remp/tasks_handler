@@ -59,11 +59,6 @@ export default {
             id: task.id,
             tasklist: listId,
             status: task.status
-            // tasklist: tListId,
-            // task: id,
-            // id: id,
-            // status: isChecked ? 'completed' : 'needsAction',
-            // title: text
         })
         return new Promise((resolve, reject) => {
             request.execute(resp => resolve(resp));

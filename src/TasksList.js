@@ -6,7 +6,8 @@ import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import TaskAddModal from './TaskAddModal';
 import PropTypes from 'prop-types';
-import Task from './Task'
+import Task from './Task';
+import './styles/TasksList.css';
 
 class TasksList extends Component{
     constructor(){
@@ -55,10 +56,10 @@ class TasksList extends Component{
         return (
             <div className="tasks-list">
                 <div className="header">
-                    <IconButton iconClassName='fa fa-plus' onClick={() => this.onClick_handler()}/>
                     <div className="title">Current tasks</div>
+                    <IconButton iconClassName='fa fa-plus' onClick={() => this.onClick_handler()}/>
                 </div>
-                <div className='task-list'>
+                <div className='content'>
                     {
                         this.state.tasks.map((el) => {
                             if (el)

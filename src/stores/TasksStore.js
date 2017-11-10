@@ -6,17 +6,6 @@ const  CHANGE_EVENT = 'change';
 
 let _tasks = [];
 let _error = null;
-function formatData(data){
-    if (data)
-    return {
-        id          : data.id,
-        text        : data.title,
-        notes       : data.notes,
-        dueTime     : data.due ? new Date(data.due) : '',
-        isCompleted : data.status === 'completed',
-        position    : data.position
-    }
-}
 
 const TasksStore = Object.assign({}, EventEmitter.prototype, {
     getTasks(){

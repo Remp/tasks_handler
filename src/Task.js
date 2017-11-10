@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import TasksActions from './actions/TasksActions';
+import './styles/Task.css';
 
 class Task extends Component{
     onTaskChange_handler(){
@@ -13,7 +14,7 @@ class Task extends Component{
         const isChecked = this.props.task.status === 'completed';
         return (
             <div className="task">
-                <Checkbox onClick={() => this.onTaskChange_handler()} checked={isChecked}/>
+                <Checkbox style={{padding: '0 1rem', width: 'auto'}} onClick={() => this.onTaskChange_handler()} checked={isChecked}/>
                 <div className="text">
                     {title}
                 </div>
