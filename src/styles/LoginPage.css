@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Exo');
+.login-page {
+  background: #3b57f1;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: space-around;
+}
+.login-page .content-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.login-page .content-text h1 {
+  font-family: 'family Exo';
+  letter-spacing: 0.1rem;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+.login-page .content-text .btn {
+  margin-top: 1rem;
+}
+.login-page .content-img {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.login-page .content-img img {
+  max-height: 40vh;
+  min-height: 200px;
+}

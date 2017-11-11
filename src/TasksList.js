@@ -42,7 +42,7 @@ class TasksList extends Component{
         })
     }
     onSubmit_handler(text){
-        TasksActions.insertTask({id: this.props.params.listId, title: text});
+        TasksActions.insertTask({id: this.props.params.taskId, title: text});
         this.setState({
             isAddingTask: false
         })
@@ -61,12 +61,12 @@ class TasksList extends Component{
                 </div>
                 <div className='content'>
                     {
-                        this.state.tasks ? this.state.tasks.map((el) => {
+                        this.state.tasks.map((el) => {
                             if (el)
                                 return (
                                     <Task key={el.id} task={el} listId={this.props.params.listId}/>   
                                 )
-                        }) : ''
+                        })
                     }
                 </div>
                 <TaskAddModal isOpen={this.state.isAddingTask} 

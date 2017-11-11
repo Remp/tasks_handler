@@ -47,21 +47,6 @@ const TasksActions = {
                 error: err
             })
         })
-    },
-    deleteTask(task, listId){
-        api.deleteTask(task, listId)
-        .then(data => {
-            AppDispatcher.dispatch({
-                type: AppConstants.TASK_DELETE_SUCCESS,
-                id: task.id
-            })
-        })
-        .catch(err => {
-            AppDispatcher.dispatch({
-                type: AppConstants.TASK_DELETE_FAIL,
-                error: err
-            })
-        })
     }
 }
 export default TasksActions;
