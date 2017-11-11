@@ -56,6 +56,17 @@ AppDispatcher.register(action => {
             _error = action.error;
             TasksStore.emitChange();            
         }
+        case AppConstants.TASK_DELETE_SUCCESS: {
+            const index = _tasks.findIndex((task) => {
+                return action.id === task.id
+            })
+            _tasks.splice(index, 1);
+            TasksStore.emitChange();                        
+        }
+        case AppConstants.TASK_DELETE_FAIL: {
+            _error = action.error;
+            TasksStore.emitChange();
+        }
         default: {}
     }
 })

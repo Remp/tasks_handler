@@ -8,6 +8,7 @@
     "font-awesome": "^4.7.0",
     "google-auth-library": "^0.11.0",
     "googleapis": "^22.2.0",
+    "jquery": "^3.2.1",
     "keymirror": "^0.1.1",
     "material-ui": "^0.19.4",
     "node-less-chokidar": "^0.1.2",
@@ -19,8 +20,8 @@
     "react-tap-event-plugin": "^3.0.2"
   },
   "scripts": {
-    "build-css": "node-less-chokidar src/styles/ -o src/styles",
-    "watch-css": "npm run build-css && node-less-chokidar src/styles -o src/styles --watch --recursive",
+    "build-css": "node-less-chokidar src/styles/ -o src/styles_builded/",
+    "watch-css": "npm run build-css && node-less-chokidar src/styles/ -o src/styles_builded/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",

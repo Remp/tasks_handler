@@ -58,7 +58,17 @@ export default {
             task: task,
             id: task.id,
             tasklist: listId,
-            status: task.status
+            status: task.status,
+            title: task.title
+        })
+        return new Promise((resolve, reject) => {
+            request.execute(resp => resolve(resp));
+        })
+    },
+    deleteTask(task, listId){
+        let request = window.gapi.client.tasks.tasks.delete({
+            task: task.id,
+            tasklist: listId
         })
         return new Promise((resolve, reject) => {
             request.execute(resp => resolve(resp));
