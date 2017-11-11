@@ -34,15 +34,15 @@ AppDispatcher.register(action => {
             TasksStore.emitChange();
             break;
         }
-        case AppConstants.TASK_INSERT_SUCCESS: {
-            
+        case AppConstants.TASK_INSERT_SUCCESS: {           
             _tasks.unshift(action.task);
             TasksStore.emitChange();
             break;
         }
         case AppConstants.TASK_INSERT_FAIL: {
             _error = action.error;
-            TasksStore.emitChange();            
+            TasksStore.emitChange(); 
+            break;           
         }
         case AppConstants.TASK_UPDATE_SUCCESS: {
             const index = _tasks.findIndex((task) => {
