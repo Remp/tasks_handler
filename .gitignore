@@ -21,14 +21,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # css
-/styles/*.css
 src/styles/LoggedInLayout.css
 src/styles/LoggedInLayout.css.map
 src/styles/LoginPage.css
-src/styles/LoginPage.css
-src/styles/LoginPage.css
+src/styles/LoginPage.css.map
 src/styles/Task.css
 src/styles/Task.css.map
 src/styles/TasksList.css
 src/styles/TasksList.css.map
-src/styles/LoginPage.css
