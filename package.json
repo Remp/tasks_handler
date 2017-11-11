@@ -20,8 +20,8 @@
     "react-tap-event-plugin": "^3.0.2"
   },
   "scripts": {
-    "build-css": "node-less-chokidar src/styles/ -o src/styles_builded/",
-    "watch-css": "npm run build-css && node-less-chokidar src/styles/ -o src/styles_builded/ --watch --recursive",
+    "build-css": "node-less-chokidar src/styles -o src/styles",
+    "watch-css": "npm run build-css && node-less-chokidar src/styles -o src/styles --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
