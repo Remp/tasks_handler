@@ -8,6 +8,7 @@ import TaskAddModal from './TaskAddModal';
 import PropTypes from 'prop-types';
 import Task from './Task';
 import './styles/TasksList.css';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class TasksList extends Component{
     constructor(){
@@ -53,11 +54,15 @@ class TasksList extends Component{
         })
     }
     render(){
+        const listId = this.props.params.listId
         return (
             <div className="tasks-list">
                 <div className="header">
-                    <div className="title">Current tasks</div>
                     <IconButton iconClassName='fa fa-plus' onClick={() => this.onClick_handler()}/>
+                    <div className="title">{this.props.current}</div>
+                    <RaisedButton secondary={true} label='Delete' 
+                        onClick={() => this.props.onDelete(listId)} 
+                    />
                 </div>
                 <div className='content'>
                     {

@@ -36,6 +36,21 @@ const TasksListActions = {
                 error: err
             })
         })
+    },
+    deleteTasksList(id){
+        api.deleteTaskList(id)
+        .then(data => {
+            AppDispatcher.dispatch({
+                type: AppConstants.TASKS_LIST_DELETE_SUCCESS,
+                id: id
+            })
+        })
+        .catch(err => {
+            AppDispatcher.dispatch({
+                type: AppConstants.TASKS_LIST_DELETE_FAIL,
+                error: err
+            })
+        })
     }
 }
 export default TasksListActions;

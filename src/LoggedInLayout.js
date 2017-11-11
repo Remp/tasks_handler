@@ -32,6 +32,7 @@ class LoggedInLayout extends Component{
             tasksList: TasksListStore.getTasksList(),
             isCreatingTask: false,
         }
+        this.current = '';
     }
     static contextTypes = {
         router: PropTypes.func.isRequired
@@ -50,6 +51,10 @@ class LoggedInLayout extends Component{
     }
     itmClick_handler(id){
         this.context.router.history.push(`/lists/${id}`);
+        const index = this.state.tasksList.findIndex((el) => {
+            return el.id === id
+        });
+        this.current = this.state.tasksList[index].name;
     }
     imtAddClick_handler(){
         this.setState({isCreatingTask: true});
@@ -60,6 +65,10 @@ class LoggedInLayout extends Component{
     }
     onClose_handler(){
         this.setState({isCreatingTask: false});
+    }
+    onDelete_handler(id){
+        TaskListActions.deleteTasksList(id);
+        this.context.router.history.push('/lists')
     }
     render(){
         return (
@@ -89,7 +98,12 @@ class LoggedInLayout extends Component{
                     </List>
                 </div>
                 <div className="content">
-                    <Route path="/lists/:listId" component={({match}) => <TasksList params={match.params}/>} />
+                    <Route path="/lists/:listId" component={({match}) => <TasksList 
+                                                                            onDelete={id => this.onDelete_handler(id)} 
+                                                                            current={this.current} 
+                                                                            params={match.params}
+                                                                        />} 
+                    />
                 </div>
                 <TaskAddModal isOpen={this.state.isCreatingTask} 
                     onSubmit={(text) => this.onSubmit_handler(text)}

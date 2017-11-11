@@ -38,7 +38,6 @@ AppDispatcher.register(action => {
         case AppConstants.TASKS_LIST_LOAD_FAIL: {
             _tasks_list = [];
             _error = action.error;
-            TasksListStore.emitChange();
             break;
         }
         case AppConstants.TASKS_LIST_INSERT_SUCCESS: {
@@ -49,7 +48,18 @@ AppDispatcher.register(action => {
         }
         case AppConstants.TASKS_LIST_INSERT_FAIL: {
             _error = action.error;
+            break;
+        }
+        case AppConstants.TASKS_LIST_DELETE_SUCCESS: {
+            const index = _tasks_list.findIndex(el => {
+                return el.id === action.id
+            });
+            _tasks_list.splice(index, 1);
             TasksListStore.emitChange();
+            break;
+        }
+        case AppConstants.TASKS_LIST_DELETE_FAIL: {
+            _error = action.error;
             break;
         }
         default: {

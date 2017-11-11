@@ -36,6 +36,14 @@ export default {
             request.execute(resp => resolve(resp));
         })
     },
+    deleteTaskList(id){
+        let request = window.gapi.client.tasks.tasklists.delete({
+            tasklist: id
+        });
+        return new Promise((resolve, reject) => {
+            request.execute(resp => resolve(resp));
+        })
+    },
     getTasks(taskListId){
         let request = window.gapi.client.tasks.tasks.list({
             tasklist: taskListId
