@@ -21,8 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # css
-/styles/*.css
-/styles/*.map
 src/styles/LoggedInLayout.css
 src/styles/LoggedInLayout.css.map
 src/styles/LoginPage.css
