@@ -21,15 +21,15 @@ class LoginPage extends Component{
     static contextTypes = {
         router: PropTypes.func.isRequired
     } 
-    onChange_handler(){
+    onChange_handler = () => {
         if (this.setState)
             this.setState({isLoggedIn: getStateFromFlux()});
     }
     componentDidMount(){
-        SessionStore.addChangeListener(() => this.onChange_handler());
+        SessionStore.addChangeListener(this.onChange_handler);
     }
     componentWillUnmount(){
-        SessionStore.removeChangeListener(() => this.onChange_handler());
+        SessionStore.removeChangeListener(this.onChange_handler);
     }
     componentWillUpdate(nextP, nextS){
         // если залогинен тогда переводим на главную страницу

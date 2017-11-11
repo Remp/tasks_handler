@@ -12,6 +12,7 @@ import TaskListActions from './actions/TasksListActions';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import TasksList from './TasksList';
+import SessionStore from './stores/SessionStore';
 
 const HomeIcon = <FontIcon className="fa fa-home" />
 const AskIcon = <FontIcon className="fa fa-question-circle-o"  />
@@ -70,6 +71,10 @@ class LoggedInLayout extends Component{
         TaskListActions.deleteTasksList(id);
         this.context.router.history.push('/lists')
     }
+    onLogout_handler(){
+        SessionStore.logout();
+        this.context.router.history.push('/login');
+    }
     render(){
         return (
             <div className="logged-in-layout">
@@ -94,7 +99,9 @@ class LoggedInLayout extends Component{
                         <Divider />
                         <ListItem primaryText='New task' leftIcon={PlusIcon} onClick={() => this.imtAddClick_handler()}/>
                         <Divider />
-                        <ListItem primaryText='Logout' leftIcon={ExitIcon} />
+                        <ListItem primaryText='Logout' onClick={() => this.onLogout_handler()} 
+                            leftIcon={ExitIcon} 
+                        />
                     </List>
                 </div>
                 <div className="content">

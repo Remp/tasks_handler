@@ -26,7 +26,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="app">
           <Switch>
-            <Route path='/login' compornent={LoginPage}/>
+            <Route path='/login' component={LoginPage}/>
             <Route path='/lists' render={() => {
               return !SessionStorage.isLoggedIn() ? <Redirect to='/login' /> : <LoggedInLayout />
               }}

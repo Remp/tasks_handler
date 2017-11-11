@@ -10,6 +10,9 @@ const SessionStore = Object.assign({}, EventEmitter.prototype, {
     isLoggedIn(){
         return _isLoggedIn;
     },
+    logout(){
+        _isLoggedIn = false;
+    },
     emitChange(){
         this.emit(CHANGE_EVENT);
     },
@@ -17,7 +20,7 @@ const SessionStore = Object.assign({}, EventEmitter.prototype, {
         this.on(CHANGE_EVENT, callback);
     },
     removeChangeListener(callback){
-        this.removeChangeListener(CHANGE_EVENT, callback);
+        this.removeListener(CHANGE_EVENT, callback);
     }
 });
 AppDispatcher.register(action => {
