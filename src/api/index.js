@@ -67,7 +67,8 @@ export default {
             id: task.id,
             tasklist: listId,
             status: task.status,
-            title: task.title
+            title: task.title,
+            notes: task.notes
         })
         return new Promise((resolve, reject) => {
             request.execute(resp => resolve(resp));
