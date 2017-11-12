@@ -14,11 +14,11 @@ import { Route } from 'react-router-dom';
 import TasksList from './TasksList';
 import SessionStore from './stores/SessionStore';
 
-const HomeIcon = <FontIcon className="fa fa-home" />
-const AskIcon = <FontIcon className="fa fa-question-circle-o"  />
-const ExitIcon = <FontIcon className="fa fa-sign-out"  />
-const FolderIcon = <FontIcon className="fa fa-folder" />
-const PlusIcon = <FontIcon className="fa fa-plus" />
+const HomeIcon = <FontIcon className="fa fa-home" hoverColor='red'/>
+const AskIcon = <FontIcon className="fa fa-question-circle-o" hoverColor='red'/>
+const ExitIcon = <FontIcon className="fa fa-sign-out" hoverColor='red' />
+const FolderIcon = <FontIcon className="fa fa-folder" hoverColor='red'/>
+const PlusIcon = <FontIcon className="fa fa-plus" hoverColor='red'/>
 
 function getStateFromFlux(){
     return {
@@ -32,6 +32,7 @@ class LoggedInLayout extends Component{
         this.state = {
             tasksList: TasksListStore.getTasksList(),
             isCreatingTask: false,
+            currentId: ''
         }
         this.current = '';
     }
@@ -56,6 +57,7 @@ class LoggedInLayout extends Component{
             return el.id === id
         });
         this.current = this.state.tasksList[index].name;
+        this.setState({currentId: id})
     }
     imtAddClick_handler(){
         this.setState({isCreatingTask: true});
@@ -90,14 +92,21 @@ class LoggedInLayout extends Component{
                             {
                                 this.state.tasksList.map((el) => {
                                     return (
-                                        <ListItem key={el.id} primaryText={el.name} leftIcon={FolderIcon} 
-                                                    onClick={() => this.itmClick_handler(el.id)}/>
+                                        <div key={el.id} style={el.id === this.state.currentId ? 
+                                            {backgroundColor: 'rgba(117, 117, 117, 0.1)'} : {backgroundColor: ''}}>
+                                            <ListItem  primaryText={el.name} leftIcon={FolderIcon} 
+                                                onClick={() => this.itmClick_handler(el.id)}                       
+                                            />
+                                        </div>
+                                        
                                     )
                                 })
                             }
                         </List>
                         <Divider />
-                        <ListItem primaryText='New task' leftIcon={PlusIcon} onClick={() => this.imtAddClick_handler()}/>
+                        <ListItem primaryText='New task' leftIcon={PlusIcon} 
+                            onClick={() => this.imtAddClick_handler()}
+                        />
                         <Divider />
                         <ListItem primaryText='Logout' onClick={() => this.onLogout_handler()} 
                             leftIcon={ExitIcon} 
