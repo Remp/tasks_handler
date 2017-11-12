@@ -24,6 +24,10 @@ class Task extends Component{
     onTaskChange_handler(){
         const task = this.props.task;
         task.status = task.status === 'completed' ? 'needsAction' : 'completed';
+        TasksActions.updateTask(task, this.props.listId);
+    }
+    onTaskSubmit_handler(){
+        const task = this.props.task;
         task.title = this.state.txtValue;
         task.notes = this.state.txtDesc;
         TasksActions.updateTask(task, this.props.listId);
@@ -68,7 +72,7 @@ class Task extends Component{
                     />
                     <div className="btn-set">
                         <RaisedButton labelColor='white' style={style} backgroundColor="#a4c639" label='Submit' 
-                            onClick={() => this.onTaskChange_handler()} 
+                            onClick={() => this.onTaskSubmit_handler()} 
                         />
                     </div>
                 </div>
