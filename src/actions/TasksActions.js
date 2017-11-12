@@ -7,8 +7,11 @@ const TasksActions = {
         api.getTasks(tasksListId)
         .then(data => {
             AppDispatcher.dispatch({
+                type: AppConstants.TASK_REQUEST
+            });
+            AppDispatcher.dispatch({
                 type: AppConstants.TASKS_LOAD_SUCCESS,
-                tasks: data.items
+                tasks: data.items || []
             })
         })
         .catch(err => {

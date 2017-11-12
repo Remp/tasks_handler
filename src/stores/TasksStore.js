@@ -6,8 +6,12 @@ const  CHANGE_EVENT = 'change';
 
 let _tasks = [];
 let _error = null;
+let isLoading = false;
 
 const TasksStore = Object.assign({}, EventEmitter.prototype, {
+    getState(){
+        return isLoading
+    },
     getTasks(){
         return _tasks;
     },
@@ -23,13 +27,20 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
 });
 AppDispatcher.register(action => {
     switch(action.type){
+        case AppConstants.TASK_REQUEST: {
+            isLoading = true;
+            TasksStore.emitChange();
+            break;
+        }
         case AppConstants.TASKS_LOAD_SUCCESS: {
             _tasks = action.tasks;
+            isLoading = false;
             TasksStore.emitChange();
             break;
         }
         case AppConstants.TASKS_LOAD_FAIL: {
             _tasks = [];
+            isLoading = false;
             _error = action.error;
             TasksStore.emitChange();
             break;
@@ -54,18 +65,21 @@ AppDispatcher.register(action => {
         }
         case AppConstants.TASK_UPDATE_FAIL: {
             _error = action.error;
-            TasksStore.emitChange();            
+            TasksStore.emitChange();    
+            break;        
         }
         case AppConstants.TASK_DELETE_SUCCESS: {
             const index = _tasks.findIndex((task) => {
                 return action.id === task.id
             })
             _tasks.splice(index, 1);
-            TasksStore.emitChange();                        
+            TasksStore.emitChange();  
+            break;                      
         }
         case AppConstants.TASK_DELETE_FAIL: {
             _error = action.error;
             TasksStore.emitChange();
+            break;
         }
         default: {}
     }

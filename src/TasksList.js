@@ -9,18 +9,21 @@ import PropTypes from 'prop-types';
 import Task from './Task';
 import './styles/TasksList.css';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class TasksList extends Component{
     constructor(){
         super();
         this.state = {
             isAddingTask: false,
-            tasks: TasksStore.getTasks()
+            tasks: TasksStore.getTasks(),
+            isLoading: TasksStore.getState()
         }
     }
     onChange_handler = () => {
         this.setState({
-            tasks: TasksStore.getTasks()
+            tasks: TasksStore.getTasks(),
+            isLoading: TasksStore.getState()
         })
     }
     componentDidMount(){
@@ -30,7 +33,6 @@ class TasksList extends Component{
         TasksStore.removeChangeListener(this.onChange_handler);        
     }
     componentWillReceiveProps(nextP){
-        let s =5;
         if (this.props.params.taskId !== nextP.params.listId)
             TasksActions.getTasks(nextP.params.listId);
     }
@@ -66,12 +68,12 @@ class TasksList extends Component{
                 </div>
                 <div className='content'>
                     {
-                        this.state.tasks ? this.state.tasks.map((el) => {
+                        !this.state.isLoading ? this.state.tasks.map((el) => {
                             if (el)
                                 return (
                                     <Task key={el.id} task={el} listId={this.props.params.listId}/>   
                                 )
-                        }) : ''
+                        }) : <CircularProgress />
                     }
                 </div>
                 <TaskAddModal isOpen={this.state.isAddingTask} 
