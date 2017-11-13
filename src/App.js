@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './styles/App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import LoginPage from './LoginPage';
-import LoggedInLayout from './LoggedInLayout';
+import LoginPage from './containers/LoginPage';
+import LoggedInLayout from './containers/LoggedInLayout';
 import SessionStorage from './stores/SessionStore'
 import PropTypes from 'prop-types';
 

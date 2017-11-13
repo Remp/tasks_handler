@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
-import './styles/LoginPage.css';
-import desk from './img/desk.png';
-import SessionActions from './actions/SessionActions';
-import SessionStore from './stores/SessionStore';
-import PropTypes from 'prop-types'
-
-function getStateFromFlux(){
-    return SessionStore.isLoggedIn();
-}
+import SessionActions from '../actions/SessionActions';
+import SessionStore from '../stores/SessionStore';
+import PropTypes from 'prop-types';
+import LoginPage_component from '../containers/LoginPage'
 
 class LoginPage extends Component{
     constructor(){
         super();
         this.state = {
-            isLoggedIn: getStateFromFlux()
+            isLoggedIn: SessionStore.isLoggedIn()
         };
     }
     static contextTypes = {
@@ -23,7 +16,7 @@ class LoginPage extends Component{
     } 
     onChange_handler = () => {
         if (this.setState)
-            this.setState({isLoggedIn: getStateFromFlux()});
+            this.setState({isLoggedIn: SessionStore.isLoggedIn()});
     }
     componentDidMount(){
         SessionStore.addChangeListener(this.onChange_handler);
@@ -36,7 +29,7 @@ class LoginPage extends Component{
         if (nextS.isLoggedIn)
             this.redirectLoggedInUser();
     }
-    click_handler(e){
+    click_handler(){
         SessionActions.authorize();
     }
     redirectLoggedInUser() {
@@ -50,16 +43,7 @@ class LoginPage extends Component{
     }
     render(){
         return (
-            <div className="login-page">
-                <div className="content-text">
-                    <h1>Welcome to task handler</h1>
-                    <p>organise your life</p>
-                    <RaisedButton onClick={(e) => this.click_handler(e)} className='btn' label='Log in with Google' />
-                </div>
-                <div className="content-img">
-                    <img src={desk} alt="There's no grave"/>
-                </div>
-            </div>
+            <LoginPage_component click_handler={() => this.click_handler()} />
         )
     }
 }
