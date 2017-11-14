@@ -26,7 +26,7 @@ class TaskAddModal extends Component{
     render(){
         return (
             <Dialog style={{minWidth: '30rem', maxWidth: '100%'}} actions={[
-                    <FlatButton label='Close' onTouchTap={() => this.props.close_handler()} />,
+                    <FlatButton label='Close' onTouchTap={() => this.close_handler()} />,
                     <FlatButton disabled={!this.state.text} label='Submit' 
                         onTouchTap={() => this.submit_handler()} 
                     />

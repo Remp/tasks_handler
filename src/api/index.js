@@ -1,13 +1,14 @@
-import CLIENT_ID from '../config';
+import config from '../config';
 const SCOPES = ['https://www.googleapis.com/auth/tasks', 'https://www.googleapis.com/auth/plus.me'];
 
 // авторизация пользователя
 export default {
     authorize(params){
         return new Promise((resolve, reject) => {
+            let cl = config.CLIENT_ID;
             window.gapi.auth.authorize(
                 {
-                    'client_id': CLIENT_ID,
+                    'client_id': config.CLIENT_ID,
                     'scope': SCOPES,
                     'immediate': params.immediate,
                     'cookie_policy': 'single_host_origin'

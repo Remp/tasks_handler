@@ -1,1 +1,3 @@
-export default window.CLIENT_ID;
+export default {
+    CLIENT_ID: window.CLIENT_ID
+};
