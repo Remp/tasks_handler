@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TasksActions from '../actions/TasksActions';
 import $ from 'jquery';
-import Task_component from '../components/Task';
+import TaskComponent from '../components/Task';
 
 class Task extends Component{
     constructor(){
@@ -42,7 +42,7 @@ class Task extends Component{
     }
     render(){
         return(
-            <Task_component 
+            <TaskComponent 
                 task={this.props.task}
                 onTaskChange_handler={() => this.onTaskChange_handler()}
                 toggle_handler={(e, elem) => this.toggle_handler(e, elem)}

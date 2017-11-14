@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SessionActions from '../actions/SessionActions';
 import SessionStore from '../stores/SessionStore';
 import PropTypes from 'prop-types';
-import LoginPage_component from '../containers/LoginPage'
+import LoginPageComponent from '../containers/LoginPage'
 
 class LoginPage extends Component{
     constructor(){
@@ -43,7 +43,7 @@ class LoginPage extends Component{
     }
     render(){
         return (
-            <LoginPage_component click_handler={() => this.click_handler()} />
+            <LoginPageComponent click_handler={() => this.click_handler()} />
         )
     }
 }

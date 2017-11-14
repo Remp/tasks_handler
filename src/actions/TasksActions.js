@@ -11,7 +11,7 @@ const TasksActions = {
         .then(data => {
             AppDispatcher.dispatch({
                 type: AppConstants.TASKS_LOAD_SUCCESS,
-                tasks: data.items || []
+                tasks: data
             })
         })
         .catch(err => {

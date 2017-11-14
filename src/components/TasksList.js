@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import {List, ListItem} from 'material-ui/List';
-import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import TaskAddModal from '../containers/TaskAddModal';
 import Task from '../containers/Task';

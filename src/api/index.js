@@ -5,7 +5,6 @@ const SCOPES = ['https://www.googleapis.com/auth/tasks', 'https://www.googleapis
 export default {
     authorize(params){
         return new Promise((resolve, reject) => {
-            let cl = config.CLIENT_ID;
             window.gapi.auth.authorize(
                 {
                     'client_id': config.CLIENT_ID,

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import TasksActions from '../actions/TasksActions';
 import TasksStore from '../stores/TasksStore';
-import PropTypes from 'prop-types';
-import TasksList_component from '../components/TasksList'
+import TasksListComponent from '../components/TasksList'
 
 class TasksList extends Component{
     constructor(){
@@ -53,7 +52,7 @@ class TasksList extends Component{
     }
     render(){
         return (
-            <TasksList_component 
+            <TasksListComponent 
                 onClick_handler={() => this.onClick_handler()}
                 currentName={this.props.currentName}
                 onDelete={(listId) => this.props.onDelete(listId)}

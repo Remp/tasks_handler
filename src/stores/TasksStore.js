@@ -9,7 +9,10 @@ let _error = null;
 let isLoading = false;
 function deifyError(task){
     if (task.code)
-        _error = task.code == '400' ? 'Failed task download' : 'Occured some problem'
+        _error = task.code == '400' ? 'Failed task download' : 
+            task.code == '-1' ? 'Check internet connection' : 'Occured some problem'
+    else
+        _error = null;
 }
 
 const TasksStore = Object.assign({}, EventEmitter.prototype, {
@@ -40,7 +43,7 @@ AppDispatcher.register(action => {
             break;
         }
         case AppConstants.TASKS_LOAD_SUCCESS: {
-            _tasks = action.tasks;
+            _tasks = action.tasks.items || [];
             isLoading = false;
             deifyError(action.tasks);
             TasksStore.emitChange();

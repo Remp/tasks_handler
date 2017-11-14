@@ -17,7 +17,7 @@ const SessionActions = {
                 type: AppConstants.SESSION_AUTHORIZE_FAIL
             });
             if (callback)
-                callback;
+                callback();
         })
     }
 }

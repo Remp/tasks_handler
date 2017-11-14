@@ -14,6 +14,8 @@ const AskIcon = <FontIcon className="fa fa-question-circle-o" />
 const ExitIcon = <FontIcon className="fa fa-sign-out" />
 const FolderIcon = <FontIcon className="fa fa-folder" />
 const PlusIcon = <FontIcon className="fa fa-plus" />
+const ErrorIcon = <FontIcon className="fa fa-exclamation-circle" color='red'/>
+
 class LoggedInLayout extends Component{   
     render(){
         return (
@@ -28,7 +30,7 @@ class LoggedInLayout extends Component{
                         <Subheader style={{paddingLeft: '1rem'}} inset={true}>Tasks list</Subheader>
                         <List className='task-list'>
                             {
-                                this.props.tasksList.map((el) => {
+                                !this.props.error ? this.props.tasksList.map((el) => {
                                     return (
                                         <div key={el.id} style={el.id === this.props.currentId ? 
                                             {backgroundColor: 'rgba(117, 117, 117, 0.1)'} : {backgroundColor: ''}}>
@@ -38,7 +40,8 @@ class LoggedInLayout extends Component{
                                         </div>
                                         
                                     )
-                                })
+                                }) :
+                                <ListItem  primaryText={this.props.error} leftIcon={ErrorIcon} />
                             }
                         </List>
                         <Divider />

@@ -4,13 +4,14 @@ import TasksListStore from '../stores/TasksListStore';
 import TaskListActions from '../actions/TasksListActions';
 import PropTypes from 'prop-types';
 import SessionStore from '../stores/SessionStore';
-import LoggedInLayout_component from '../components/LoggedInLayout'
+import LoggedInLayoutComponent from '../components/LoggedInLayout'
 
 class LoggedInLayout extends Component{
     constructor(){
         super();
         this.state = {
             tasksList: TasksListStore.getTasksList(),
+            error: TasksListStore.getError(),
             isCreatingTask: false,
             currentId: '',
             currentName: ''
@@ -62,7 +63,7 @@ class LoggedInLayout extends Component{
     }
     render(){
         return (
-            <LoggedInLayout_component 
+            <LoggedInLayoutComponent 
                 tasksList={this.state.tasksList}
                 currentId={this.state.currentId}
                 itmClick_handler={id => this.itmClick_handler(id)}
@@ -73,6 +74,7 @@ class LoggedInLayout extends Component{
                 isCreatingTask={this.state.isCreatingTask}
                 onSubmit_handler={text => this.onSubmit_handler(text)}
                 onClose_handler={() => this.onClose_handler()}
+                error={this.state.error}
             />
         )
     }
