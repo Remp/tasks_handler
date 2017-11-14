@@ -18,5 +18,6 @@ export default keymirror({
         TASK_UPDATE_FAIL: null,
         TASK_DELETE_SUCCESS: null,
         TASK_DELETE_FAIL : null,
-        TASK_REQUEST: null
+        TASK_REQUEST: null,
+        TASK_UPDATE_REQUEST: null
 })

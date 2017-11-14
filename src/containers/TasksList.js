@@ -10,13 +10,15 @@ class TasksList extends Component{
         this.state = {
             isAddingTask: false,
             tasks: TasksStore.getTasks(),
-            isLoading: TasksStore.getState()
+            isLoading: TasksStore.getState(),
+            error: TasksStore.getError()
         }
     }
     onChange_handler = () => {
         this.setState({
             tasks: TasksStore.getTasks(),
-            isLoading: TasksStore.getState()
+            isLoading: TasksStore.getState(),
+            error: TasksStore.getError()          
         })
     }
     componentDidMount(){
@@ -61,6 +63,7 @@ class TasksList extends Component{
                 isAddingTask={this.state.isAddingTask}
                 onSubmit={text => this.onSubmit_handler(text)}
                 onClose={() => this.onClose_handler()}
+                error={this.state.error}
             />
         )
     }

@@ -10,7 +10,16 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 class TasksList extends Component{
     render(){
-        const listId = this.props.params.listId
+        const listId = this.props.params.listId;
+        const content = this.props.error ? (
+            <div className='error-message'>{this.props.error}</div>
+        ) :
+        this.props.tasks.map((el) => {
+            if (el)
+                return (
+                    <Task key={el.id} task={el} listId={this.props.params.listId}/>   
+                )
+        });
         return (
             <div className="tasks-list">
                 <div className="header">
@@ -22,12 +31,11 @@ class TasksList extends Component{
                 </div>
                 <div className='content'>
                     {
-                        !this.props.isLoading ? this.props.tasks.map((el) => {
-                            if (el)
-                                return (
-                                    <Task key={el.id} task={el} listId={this.props.params.listId}/>   
-                                )
-                        }) : <CircularProgress />
+                        !this.props.isLoading ? 
+                        content : 
+                        <CircularProgress style={{alignSelf: 'center', marginTop: '10vh'}} 
+                            size={60} thickness={6}
+                        />
                     }
                 </div>
                 <TaskAddModal isOpen={this.props.isAddingTask} 

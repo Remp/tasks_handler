@@ -7,6 +7,10 @@ const  CHANGE_EVENT = 'change';
 let _tasks = [];
 let _error = null;
 let isLoading = false;
+function deifyError(task){
+    if (task.code)
+        _error = task.code == '400' ? 'Failed task download' : 'Occured some problem'
+}
 
 const TasksStore = Object.assign({}, EventEmitter.prototype, {
     getState(){
@@ -14,6 +18,9 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
     },
     getTasks(){
         return _tasks;
+    },
+    getError(){
+        return _error;
     },
     emitChange(){
         this.emit(CHANGE_EVENT)
@@ -35,6 +42,7 @@ AppDispatcher.register(action => {
         case AppConstants.TASKS_LOAD_SUCCESS: {
             _tasks = action.tasks;
             isLoading = false;
+            deifyError(action.tasks);
             TasksStore.emitChange();
             break;
         }
@@ -54,6 +62,14 @@ AppDispatcher.register(action => {
             _error = action.error;
             TasksStore.emitChange(); 
             break;           
+        }
+        case AppConstants.TASK_UPDATE_REQUEST: {
+            const index = _tasks.findIndex((task) => {
+                return task.id === action.task.id
+            });
+            _tasks[index] = action.task; 
+            TasksStore.emitChange();
+            break;         
         }
         case AppConstants.TASK_UPDATE_SUCCESS: {
             const index = _tasks.findIndex((task) => {

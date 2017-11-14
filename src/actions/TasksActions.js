@@ -4,11 +4,11 @@ import api from '../api/index';
 
 const TasksActions = {
     getTasks(tasksListId){
+        AppDispatcher.dispatch({
+            type: AppConstants.TASK_REQUEST
+        });
         api.getTasks(tasksListId)
         .then(data => {
-            AppDispatcher.dispatch({
-                type: AppConstants.TASK_REQUEST
-            });
             AppDispatcher.dispatch({
                 type: AppConstants.TASKS_LOAD_SUCCESS,
                 tasks: data.items || []
@@ -37,8 +37,12 @@ const TasksActions = {
         })
     },
     updateTask(task, listId){
+        AppDispatcher.dispatch({
+            type: AppConstants.TASK_UPDATE_REQUEST,
+            task: task
+        });
         api.updateTask(task, listId)
-        .then(data => {
+        .then(data => {           
             AppDispatcher.dispatch({
                 type: AppConstants.TASK_UPDATE_SUCCESS,
                 task: data
