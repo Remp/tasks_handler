@@ -6,6 +6,16 @@ const  CHANGE_EVENT = 'change';
 
 let _tasks_list = [];
 let _error = null;
+function deifyError(task){
+    if (task.code){
+        _error = task.code === '400' ? 'Failed tasklist download' : 'Occured some problem'
+        return true;        
+    }
+    else{
+        _error = null;     
+        return false;   
+    }
+}
 
 function formatData(data){
     return {
@@ -17,6 +27,9 @@ function formatData(data){
 const TasksListStore = Object.assign({}, EventEmitter.prototype, {
     getTasksList(){
         return _tasks_list;
+    },
+    getError(){
+        return _error;
     },
     emitChange(){
         this.emit(CHANGE_EVENT)
@@ -31,6 +44,11 @@ const TasksListStore = Object.assign({}, EventEmitter.prototype, {
 AppDispatcher.register(action => {
     switch(action.type){
         case AppConstants.TASKS_LIST_LOAD_SUCCESS: {
+            if (deifyError(action.items)){
+                _tasks_list = [];
+                TasksListStore.emitChange();                                
+                break;   
+            }
             _tasks_list = action.items.map(formatData);
             TasksListStore.emitChange();
             break;

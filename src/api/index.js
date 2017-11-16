@@ -1,6 +1,5 @@
-const CLIENT_ID = '477913453165-sna3dpc2k0ab921m1iorpapvsjgrmqmj.apps.googleusercontent.com';
+import config from '../config';
 const SCOPES = ['https://www.googleapis.com/auth/tasks', 'https://www.googleapis.com/auth/plus.me'];
-
 
 // авторизация пользователя
 export default {
@@ -8,7 +7,7 @@ export default {
         return new Promise((resolve, reject) => {
             window.gapi.auth.authorize(
                 {
-                    'client_id': CLIENT_ID,
+                    'client_id': config.CLIENT_ID,
                     'scope': SCOPES,
                     'immediate': params.immediate,
                     'cookie_policy': 'single_host_origin'
@@ -67,7 +66,8 @@ export default {
             id: task.id,
             tasklist: listId,
             status: task.status,
-            title: task.title
+            title: task.title,
+            notes: task.notes
         })
         return new Promise((resolve, reject) => {
             request.execute(resp => resolve(resp));

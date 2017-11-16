@@ -6,10 +6,24 @@ const  CHANGE_EVENT = 'change';
 
 let _tasks = [];
 let _error = null;
+let isLoading = false;
+function deifyError(task){
+    if (task.code)
+        _error = task.code == '400' ? 'Failed task download' : 
+            task.code == '-1' ? 'Check internet connection' : 'Occured some problem'
+    else
+        _error = null;
+}
 
 const TasksStore = Object.assign({}, EventEmitter.prototype, {
+    getState(){
+        return isLoading
+    },
     getTasks(){
         return _tasks;
+    },
+    getError(){
+        return _error;
     },
     emitChange(){
         this.emit(CHANGE_EVENT)
@@ -23,13 +37,21 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
 });
 AppDispatcher.register(action => {
     switch(action.type){
+        case AppConstants.TASK_REQUEST: {
+            isLoading = true;
+            TasksStore.emitChange();
+            break;
+        }
         case AppConstants.TASKS_LOAD_SUCCESS: {
-            _tasks = action.tasks;
+            _tasks = action.tasks.items || [];
+            isLoading = false;
+            deifyError(action.tasks);
             TasksStore.emitChange();
             break;
         }
         case AppConstants.TASKS_LOAD_FAIL: {
             _tasks = [];
+            isLoading = false;
             _error = action.error;
             TasksStore.emitChange();
             break;
@@ -44,6 +66,14 @@ AppDispatcher.register(action => {
             TasksStore.emitChange(); 
             break;           
         }
+        case AppConstants.TASK_UPDATE_REQUEST: {
+            const index = _tasks.findIndex((task) => {
+                return task.id === action.task.id
+            });
+            _tasks[index] = action.task; 
+            TasksStore.emitChange();
+            break;         
+        }
         case AppConstants.TASK_UPDATE_SUCCESS: {
             const index = _tasks.findIndex((task) => {
                 return task.id === action.task.id
@@ -54,18 +84,21 @@ AppDispatcher.register(action => {
         }
         case AppConstants.TASK_UPDATE_FAIL: {
             _error = action.error;
-            TasksStore.emitChange();            
+            TasksStore.emitChange();    
+            break;        
         }
         case AppConstants.TASK_DELETE_SUCCESS: {
             const index = _tasks.findIndex((task) => {
                 return action.id === task.id
             })
             _tasks.splice(index, 1);
-            TasksStore.emitChange();                        
+            TasksStore.emitChange();  
+            break;                      
         }
         case AppConstants.TASK_DELETE_FAIL: {
             _error = action.error;
             TasksStore.emitChange();
+            break;
         }
         default: {}
     }

@@ -2,13 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './App';
-import LoginPage from './LoginPage';
 import registerServiceWorker from './registerServiceWorker';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import SessionActions from './actions/SessionActions';
 import TasksListActions from './actions/TasksListActions'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import LoggedInLayout from './LoggedInLayout';
+import { BrowserRouter, Route } from 'react-router-dom';
 import SessionStorage from './stores/SessionStore';
 
 injectTapEventPlugin();

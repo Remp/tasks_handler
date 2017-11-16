@@ -19,7 +19,7 @@ const TasksListActions = {
                 error: err
             });
             if (callback)
-                callback;
+                callback();
         })
     },
     insertTasksList(params){
