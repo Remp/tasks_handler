@@ -1,1 +1,0 @@
-var CLIENT_ID = '477913453165-sna3dpc2k0ab921m1iorpapvsjgrmqmj.apps.googleusercontent.com';
